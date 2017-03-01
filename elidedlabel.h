@@ -7,10 +7,6 @@
 #include <QPainter>
 #include <QStyleOption>
 
-// Inherited class from QLabel
-// created for the Purpose label that must be elided
-// when the window width is too short to display the text
-
 class ElidedLabel : public QLabel
 {
     Q_OBJECT
