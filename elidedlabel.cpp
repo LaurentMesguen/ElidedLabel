@@ -4,23 +4,21 @@
 /* ElidedLabel functions */
 /*************************/
 
-// Implementation inspired from http://www.mimec.org/node/307
-
-ElidedLabel::ElidedLabel(QWidget* parent, Qt::WindowFlags f)
-    : QLabel(parent, f)
+ElidedLabel::ElidedLabel(QWidget* parent)
+    : QLabel(parent)
 {
     setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     setMinimumWidth(1);
 }
 
-ElidedLabel::ElidedLabel(const QString& txt, QWidget* parent, Qt::WindowFlags f)
-    : QLabel(txt, parent, f)
+ElidedLabel::ElidedLabel(const QString& txt, QWidget* parent)
+    : QLabel(txt, parent)
 {
     setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     setMinimumWidth(1);
 }
 
-void ElidedLabel::paintEvent( QPaintEvent* /*e*/ )
+void ElidedLabel::paintEvent( QPaintEvent* )
 {
     QPainter painter(this);
     drawFrame(&painter);
@@ -33,14 +31,7 @@ void ElidedLabel::paintEvent( QPaintEvent* /*e*/ )
     if (fullText != m_lastText || cr.width() != m_lastWidth)
     {
         m_elidedText = fontMetrics().elidedText(fullText, Qt::ElideRight, cr.width());
-        if(m_elidedText != fullText)
-        {
-            m_isElided = true;
-        }
-        else
-        {
-            m_isElided = false;
-        }
+        m_isElided = m_elidedText != fullText;
         emit showHideButton(m_isElided && !m_elidedText.isEmpty());
         m_lastText = fullText;
         m_lastWidth = cr.width();

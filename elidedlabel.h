@@ -11,8 +11,8 @@ class ElidedLabel : public QLabel
 {
     Q_OBJECT
 public:
-    ElidedLabel(QWidget* parent=0, Qt::WindowFlags f=0);
-    ElidedLabel(const QString& txt, QWidget* parent=0, Qt::WindowFlags f=0);
+    ElidedLabel(QWidget* parent=nullptr);
+    ElidedLabel(const QString& txt, QWidget* parent=nullptr);
 
     bool isElided() const;
 
@@ -28,3 +28,5 @@ private:
     int m_lastWidth;
     bool m_isElided;
 };
+
+#endif
